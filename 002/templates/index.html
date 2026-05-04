@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Персональная визитка | Учитель и технический специалист</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="animated-bg"></div>
+
+    <header class="hero">
+        <div class="hero-content">
+            <div class="profile-photo">
+                <div class="photo-placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="8" r="4"/>
+                        <path d="M4 20c0-4 4-6 8-6s8 2 8 6"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="hero-text">
+                <h1>Иван Иванов</h1>
+                <p class="subtitle">Учитель информатики &amp; технический специалист</p>
+                <p class="tagline">Образование + Технологии = Будущее</p>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="pedagogics" class="section">
+            <div class="section-header">
+                <h2>Педагогическая деятельность</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                        </svg>
+                    </div>
+                    <h3>Преподавание информатики</h3>
+                    <p>Проведение уроков по программированию, алгоритмам и основам информационных технологий для учащихся 5-11 классов</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 14l9-5-9-5-9 5 9 5z"/>
+                            <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+                            <path d="M12 14l9-5-9-5-9 5 9 5zm0 0v6"/>
+                        </svg>
+                    </div>
+                    <h3>Подготовка к ОГЭ/ЕГЭ</h3>
+                    <p>Индивидуальная и групповая подготовка выпускников к успешной сдаче экзаменов по информатике</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2"/>
+                            <path d="M16 2v4M8 2v4M3 10h18"/>
+                        </svg>
+                    </div>
+                    <h3>Организация олимпиад</h3>
+                    <p>Проведение школьных и районных олимпиад по информатике, подготовка призёров региональных этапов</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <h3>Классное руководство</h3>
+                    <p>Ведение 10 класса, организация внеурочной деятельности, психолого-педагогическое сопровождение</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
+                        </svg>
+                    </div>
+                    <h3>Методическая работа</h3>
+                    <p>Разработка рабочих программ, учебно-методических комплексов, участие в педагогических конференциях</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/>
+                        </svg>
+                    </div>
+                    <h3>Консультации для родителей</h3>
+                    <p>Помощь родителям в вопросах использования технологий детьми, цифровая безопасность</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                        </svg>
+                    </div>
+                    <h3>Проектная деятельность</h3>
+                    <p>Руководство ученическими проектами, участие в конкурсах и выставках научно-технического творчества</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+                            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+                        </svg>
+                    </div>
+                    <h3>Повышение квалификации</h3>
+                    <p>Регулярное прохождение курсов повышения квалификации, участие в вебинарах и мастер-классах</p>
+                </div>
+            </div>
+
+            <div class="gallery-section">
+                <h3>Галерея педагогической деятельности</h3>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder"></div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder"></div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder"></div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder"></div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder"></div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="it" class="section">
+            <div class="section-header">
+                <h2>ИТ компетенции</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>
+                        </svg>
+                    </div>
+                    <h3>Администрирование ПК</h3>
+                    <p>Настройка, диагностика и ремонт компьютерного оборудования, установка программного обеспечения</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2"/>
+                            <path d="M8 21h8M12 17v4"/>
+                        </svg>
+                    </div>
+                    <h3>Сетевые технологии</h3>
+                    <p>Настройка локальных сетей, Wi-Fi точек доступа, диагностика севых неполадок</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <h3>Веб-разработка</h3>
+                    <p>Создание и поддержка сайтов, HTML, CSS, JavaScript, работа с CMS-системами</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 17l6-6-6-6M12 19h8"/>
+                        </svg>
+                    </div>
+                    <h3>Программирование</h3>
+                    <p>Python, JavaScript, C++, разработка учебных программ и автоматизация рутинных задач</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                            <path d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"/>
+                        </svg>
+                    </div>
+                    <h3>Базы данных</h3>
+                    <p>Проектирование и управление базами данных, SQL-запросы, работа с MySQL, PostgreSQL</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                    </div>
+                    <h3>Информационная безопасность</h3>
+                    <p>Защита от вирусов, настройка антивирусного ПО, политики безопасности</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="5" y="2" width="14" height="20" rx="2"/>
+                            <path d="M12 18h.01"/>
+                        </svg>
+                    </div>
+                    <h3>Мобильные устройства</h3>
+                    <p>Настройка и управление мобильными устройствами, синхронизация, безопасность данных</p>
+                </div>
+
+                <div class="card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                        </svg>
+                    </div>
+                    <h3>Техническая поддержка</h3>
+                    <p>Консультирование пользователей, решение технических проблем,Helpdesk</p>
+                </div>
+            </div>
+
+            <div class="gallery-section">
+                <h3>Галерея ИТ деятельности</h3>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder"></div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder"></div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder"></div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder"></div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder"></div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="section">
+            <div class="section-header">
+                <h2>Услуги</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card service-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                        </svg>
+                    </div>
+                    <h3>Репетиторство по информатике</h3>
+                    <p>Индивидуальные занятия для подготовки к ОГЭ/ЕГЭ, изучение программирования и алгоритмов</p>
+                    <button class="btn-open">Открыть материал</button>
+                </div>
+
+                <div class="card service-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="3" width="20" height="14" rx="2"/>
+                            <path d="M8 21h8M12 17v4"/>
+                        </svg>
+                    </div>
+                    <h3>Настройка компьютера</h3>
+                    <p>Диагностика, чистка, установка ОС и ПО, устранение вирусов, оптимизация работы</p>
+                    <button class="btn-open">Открыть материал</button>
+                </div>
+
+                <div class="card service-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                            <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <h3>Создание сайта</h3>
+                    <p>Разработка сайта-визитки, landing page, интернет-магазина с современным дизайном</p>
+                    <button class="btn-open">Открыть материал</button>
+                </div>
+
+                <div class="card service-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
+                        </svg>
+                    </div>
+                    <h3>Методические материалы</h3>
+                    <p>Разработка учебных презентаций, тестов, рабочих тетрадей для учителей информатики</p>
+                    <button class="btn-open">Открыть материал</button>
+                </div>
+
+                <div class="card service-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M18 3a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3H6a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3V6a3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3h12a3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/>
+                        </svg>
+                    </div>
+                    <h3>Настройка сети</h3>
+                    <p>Организация Wi-Fi, настройка роутера, диагностика и устранение сетевых проблем</p>
+                    <button class="btn-open">Открыть материал</button>
+                </div>
+
+                <div class="card service-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M4 17l6-6-6-6M12 19h8"/>
+                        </svg>
+                    </div>
+                    <h3>Обучение пенсионеров</h3>
+                    <p>Базовые навыки работы на компьютере и смартфоне для пожилых людей</p>
+                    <button class="btn-open">Открыть материал</button>
+                </div>
+
+                <div class="card service-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="5" y="2" width="14" height="20" rx="2"/>
+                            <path d="M12 18h.01"/>
+                        </svg>
+                    </div>
+                    <h3>Восстановление данных</h3>
+                    <p>Восстановление удалённых файлов, ремонт флешек, перенос данных на новый носитель</p>
+                    <button class="btn-open">Открыть материал</button>
+                </div>
+
+                <div class="card service-card">
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                        </svg>
+                    </div>
+                    <h3>IT-консультации</h3>
+                    <p>Помощь в выборе техники, настройке гаджетов, решении повседневных технических вопросов</p>
+                    <button class="btn-open">Открыть материал</button>
+                </div>
+            </div>
+
+            <div class="gallery-section">
+                <h3>Галерея услуг</h3>
+                <div class="gallery-grid">
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder"></div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder"></div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder"></div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder"></div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder"></div>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="gallery-placeholder"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="contacts">
+        <div class="contacts-content">
+            <h3>Контакты</h3>
+            <div class="contact-items">
+                <a href="tel:+79001234567" class="contact-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                    </svg>
+                    <span>+7 (900) 123-45-67</span>
+                </a>
+                <a href="mailto:ivanov@mail.ru" class="contact-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <path d="M22 6l-10 7L2 6"/>
+                    </svg>
+                    <span>ivanov@mail.ru</span>
+                </a>
+                <a href="https://vk.com/ivanov" target="_blank" class="contact-item">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M15.684 0H8.316C1.592 0 0 1.592 0 8.316v7.368C0 22.408 1.592 24 8.316 24h7.368C22.408 24 24 22.408 24 15.684V8.316C24 1.592 22.408 0 15.684 0zm3.692 17.123h-1.744c-.66 0-.864-.528-2.04-1.768-1.032-1.056-1.488-1.2-1.728-1.2-.24 0-.48.12-.48.6v1.656c0 .324-.12.6-.6.6h-2.16c-.6 0-.72-.36-1.44-1.44-1.104-1.68-1.92-2.976-1.968-3.168-.24-.72-.18-.96.48-1.44l1.2-.96c.36-.24.48-.36.6-.6.12-.36 0-.72-.36-.96-.48-.36-1.32-.48-1.8-.48-.36 0-.6.12-.84.24l-.48.24c-.24.12-.48.24-.48.6v1.44c0 .36-.24.6-.6.6-.84 0-1.8.72-2.76 2.04-1.2 1.68-1.44 2.88-1.44 3.36 0 .48.12.96.72.96h1.8c.48 0 .6-.12.96-.6l.72-1.44c.24-.36.48-.48.84-.48.48 0 .96.24 1.44.72.72.72.96 1.08 1.44 1.08h1.8c.48 0 .6-.24.6-.6v-.12c0-.48.24-.84.48-1.2.24-.24.48-.48.72-.48.36 0 .72.36 1.44 1.32 1.44 1.92 2.52 2.88 3 2.88.48 0 .84-.24.84-.72v-1.44c0-.48-.12-.84-.48-1.2-.24-.24-.48-.36-.72-.36-.36 0-.72.12-1.08.48-.48.48-.84.84-1.2.84-.36 0-.6-.24-.6-.72v-1.8z"/>
+                    </svg>
+                    <span>vk.com/ivanov</span>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="copyright">
+        <p>&copy; 2026 Иван Иванов. Все права защищены.</p>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
