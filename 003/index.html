@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="Персональная визитка педагога и IT-специалиста. Педагогические услуги, IT-компетенции, веб-разработка, подготовка к экзаменам.">
+    <title>Персональная визитка — Педагог и IT-специалист</title>
+    <style>
+        /* === БАЗОВЫЕ СТИЛИ И СБРОС === */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #f8fafc;
+            --bg-secondary: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --accent: #6366f1;
+            --accent-light: #818cf8;
+            --card-bg: #ffffff;
+            --border: #e2e8f0;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-hover: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 80px;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.65;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility;
+        }
+
+        /* === АНИМИРОВАННЫЙ ГРАДИЕНТНЫЙ ФОН === */
+        .gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0e7ff 25%, #fae8ff 50%, #e0e7ff 75%, #f0f9ff 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* === ШАПКА === */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            padding-left: max(1rem, env(safe-area-inset-left));
+            padding-right: max(1rem, env(safe-area-inset-right));
+        }
+
+        /* Портрет в кружочке */
+        .portrait {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--accent);
+            flex-shrink: 0;
+            box-shadow: 0 0 15px rgba(99, 102, 241, 0.3);
+        }
+
+        /* Навигация */
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            min-height: 44px;
+        }
+
+        /* === ОСНОВНОЙ КОНТЕЙНЕР === */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            padding-left: max(1rem, env(safe-area-inset-left));
+            padding-right: max(1rem, env(safe-area-inset-right));
+        }
+
+        /* === ЗАГОЛОВКИ РАЗДЕЛОВ === */
+        section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: clamp(1.5rem, 4vw, 2.25rem);
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+            border-radius: 2px;
+            margin: 0.75rem auto 0;
+        }
+
+        /* === СЕТКА КАРТОЧЕК === */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        /* === КАРТОЧКА === */
+        .card {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-light));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .card h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .card p {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.65;
+        }
+
+        /* === ГАЛЕРЕЯ ФОТО === */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 4 / 3;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+            background: var(--card-bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .gallery-placeholder {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        /* === КОНТАКТЫ === */
+        .contacts-section {
+            background: var(--card-bg);
+            border-radius: 1rem;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+
+        .contacts-section h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contacts-grid {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-item a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            flex-shrink: 0;
+        }
+
+        /* === ФОРМА ОБРАТНОЙ СВЯЗИ === */
+        .contact-form-wrapper {
+            max-width: 600px;
+            margin: 2.5rem auto 0;
+            text-align: left;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .form-group label {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 0.85rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 0.625rem;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            transition: border-color 0.25s ease, box-shadow 0.25s ease;
+            outline: none;
+        }
+
+        .form-group select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236366f1' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 2.5rem;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-submit {
+            padding: 0.9rem 1.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: inherit;
+            color: #fff;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            border: none;
+            border-radius: 0.625rem;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            margin-top: 0.5rem;
+        }
+
+
+        .form-submit:active {
+            transform: translateY(0);
+        }
+
+        .form-message {
+            margin-top: 1rem;
+            padding: 0.875rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.95rem;
+            display: none;
+        }
+
+        .form-message.success {
+            display: block;
+            background: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+
+        .form-message.error {
+            display: block;
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+
+        .form-group input.error-field,
+        .form-group textarea.error-field,
+        .form-group select.error-field {
+            border-color: #ef4444;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+        }
+
+        /* === HOVER: ТОЛЬКО НА УСТРОЙСТВАХ С МЫШКОЙ === */
+        @media (hover: hover) and (pointer: fine) {
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: var(--shadow-hover);
+            }
+
+            .card:hover::before {
+                transform: scaleX(1);
+            }
+
+            nav a:hover {
+                background: var(--accent);
+                color: #fff;
+                transform: translateY(-2px);
+            }
+
+            .gallery-item:hover {
+                transform: scale(1.03);
+            }
+
+            .contact-item a:hover {
+                color: var(--text-primary);
+                text-decoration: underline;
+            }
+
+            .form-submit:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 16px rgba(99, 102, 241, 0.35);
+            }
+        }
+
+        /* === ФУТЕР / КОПИРАЙТ === */
+        footer {
+            text-align: center;
+            padding: 1.5rem 2rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            border-top: 1px solid var(--border);
+        }
+
+        /* === АДАПТИВ === */
+        @media (max-width: 1024px) {
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+                padding-left: max(0.5rem, env(safe-area-inset-left));
+                padding-right: max(0.5rem, env(safe-area-inset-right));
+            }
+
+            nav ul {
+                gap: 0.75rem;
+            }
+
+            nav a {
+                font-size: 0.9rem;
+                padding: 0.4rem 0.8rem;
+            }
+
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .contacts-grid {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .container {
+                padding: 1rem;
+                padding-left: max(0.5rem, env(safe-area-inset-left));
+                padding-right: max(0.5rem, env(safe-area-inset-right));
+            }
+        }
+
+        @media (max-width: 640px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-item {
+                font-size: 1rem;
+            }
+
+            .contact-form-wrapper {
+                margin-top: 2rem;
+            }
+
+            .form-submit {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Анимированный градиентный фон -->
+    <div class="gradient-bg"></div>
+
+    <!-- ШАПКА: портрет + навигация в одной линии -->
+    <header>
+        <div class="header-container">
+            <img src="0_photo_portret.jpg" alt="Фото портрета" class="portrait">
+            <nav>
+                <ul>
+                    <li><a href="#pedagogy">Педагогика</a></li>
+                    <li><a href="#it">IT-компетенции</a></li>
+                    <li><a href="#services">Услуги</a></li>
+                    <li><a href="#contacts">Контакты</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- РАЗДЕЛ: ПЕДАГОГИЧЕСКАЯ ДЕЯТЕЛЬНОСТЬ -->
+        <section id="pedagogy">
+            <h2 class="section-title">Педагогическая деятельность</h2>
+
+            <!-- 9 карточек -->
+            <div class="cards-grid">
+                <article class="card">
+                    <div class="card-icon">1</div>
+                    <h3>Подготовка к ОГЭ</h3>
+                    <p>Индивидуальная подготовка учащихся 9 классов к основному государственному экзамену по профильным предметам.</p>
+                </article>
+                <article class="card">
+                    <div class="card-icon">2</div>
+                    <h3>Подготовка к ЕГЭ</h3>
+                    <p>Курс подготовки к единому государственному экзамену с акцентом на типовые задания и разбор ошибок.</p>
+                </article>
+                <article class="card">
+                    <div class="card-icon">3</div>
+                    <h3>Олимпиадная математика</h3>
+                    <p>Развитие логического мышления и решение нестандартных задач для участия в предметных олимпиадах.</p>
+                </article>
+                <article class="card">
+                    <div class="card-icon">4</div>
+                    <h3>Программирование для школьников</h3>
+                    <p>Обучение основам алгоритмизации и языкам программирования в игровой и практической форме.</p>
+                </article>
+                <article class="card">
+                    <div class="card-icon">5</div>
+                    <h3>Робототехника</h3>
+                    <p>Сборка и программирование роботов на базе Arduino и LEGO Mindstorms для развития инженерного мышления.</p>
+                </article>
+                <article class="card">
+                    <div class="card-icon">6</div>
+                    <h3>Информатика и ИКТ</h3>
+                    <p>Преподавание школьной информатики: от базовой цифровой грамотности до проектной деятельности.</p>
+                </article>
+                <article class="card">
+                    <div class="card-icon">7</div>
+                    <h3>Физика и эксперимент</h3>
+                    <p>Практико-ориентированные занятия по физике с демонстрацией опытов и лабораторными работами.</p>
+                </article>
+                <article class="card">
+                    <div class="card-icon">8</div>
+                    <h3>Проектная деятельность</h3>
+                    <p>Курирование исследовательских и проектных работ учащихся для конференций и конкурсов.</p>
+                </article>
+                <article class="card">
+                    <div class="card-icon">9</div>
+                    <h3>Дистанционное обучение</h3>
+                    <p>Организация и проведение занятий в онлайн-формате с использованием современных LMS-платформ.</p>
+                </article>
+            </div>
+
+            <!-- Галерея из 6 фото -->
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="pedagogy/photo_1.jpg" alt="Фото 1" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'gallery-placeholder\'>Фото 1</span>';">
+                </div>
+                <div class="gallery-item">
+                    <img src="pedagogy/photo_2.jpg" alt="Фото 2" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'gallery-placeholder\'>Фото 2</span>';">
+                </div>
+                <div class="gallery-item">
+                    <img src="pedagogy/photo_3.jpg" alt="Фото 3" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'gallery-placeholder\'>Фото 3</span>';">
+                </div>
+                <div class="gallery-item">
+                    <img src="pedagogy/photo_4.jpg" alt="Фото 4" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'gallery-placeholder\'>Фото 4</span>';">
+                </div>
+                <div class="gallery-item">
+                    <img src="pedagogy/photo_5.jpg" alt="Фото 5" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'gallery-placeholder\'>Фото 5</span>';">
+                </div>
+                <div class="gallery-item">
+                    <img src="pedagogy/photo_6.jpg" alt="Фото 6" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'gallery-placeholder\'>Фото 6</span>';">
+                </div>
+            </div>
+        </section>
+
+        <!-- РАЗДЕЛ: IT-КОМПЕТЕНЦИИ -->
+        <section id="it">
+            <h2 class="section-title">IT-компетенции</h2>
+
+            <!-- 9 карточек -->
+            <div class="cards-grid">
+                <article class="card">
+                    <div class="card-icon">1</div>
+                    <h3>Веб-разработка</h3>
+                    <p>Создание адаптивных сайтов и веб-приложений на современном стеке: HTML, CSS, JavaScript, React.</p>
+                </article>
+                <article class="card">
+                    <div class="card-icon">2</div>
+                    <h3>Бэкенд-разработка</h3>
+                    <p>Проектирование серверной части, API и баз данных на Python, Node.js и SQL.</p>
+                </article>
+                <article class="card">
+                    <div class="card-icon">3</div>
+                    <h3>DevOps и CI/CD</h3>
+                    <p>Настройка автоматизации сборки, тестирования и деплоя с использованием Docker и GitHub Actions.</p>
+                </article>
+                <article class="card">
+                    <div class="card-icon">4</div>
+                    <h3>Администрирование сетей</h3>
+                    <p>Настройка локальных сетей, маршрутизаторов, VPN и сетевой безопасности.</p>
+                </article>
+                <article class="card">
+                    <div class="card-icon">5</div>
+                    <h3>Информационная безопасность</h3>
+                    <p>Аудит безопасности, настройка защиты данных и обучение пользователей основам кибербезопасности.</p>
+                </article>
+                <article class="card">
+                    <div class="card-icon">6</div>
+                    <h3>Администрирование ОС</h3>
+                    <p>Установка, настройка и поддержка Windows и Linux-систем, виртуализация на VMware и Hyper-V.</p>
+                </article>
+                <article class="card">
+                    <div class="card-icon">7</div>
+                    <h3>Работа с базами данных</h3>
+                    <p>Проектирование структуры, оптимизация запросов и администрирование PostgreSQL, MySQL, MongoDB.</p>
+                </article>
+                <article class="card">
+                    <div class="card-icon">8</div>
+                    <h3>Автоматизация процессов</h3>
+                    <p>Разработка скриптов и ботов для автоматизации рутинных задач: Python, Bash, PowerShell.</p>
+                </article>
+                <article class="card">
+                    <div class="card-icon">9</div>
+                    <h3>Техническая поддержка</h3>
+                    <p>Комплексная IT-поддержка пользователей, диагностика и решение аппаратных и программных проблем.</p>
+                </article>
+            </div>
+
+            <!-- Галерея из 6 фото -->
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="it/photo_1.jpg" alt="Фото 1" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'gallery-placeholder\'>Фото 1</span>';">
+                </div>
+                <div class="gallery-item">
+                    <img src="it/photo_2.jpg" alt="Фото 2" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'gallery-placeholder\'>Фото 2</span>';">
+                </div>
+                <div class="gallery-item">
+                    <img src="it/photo_3.jpg" alt="Фото 3" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'gallery-placeholder\'>Фото 3</span>';">
+                </div>
+                <div class="gallery-item">
+                    <img src="it/photo_4.jpg" alt="Фото 4" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'gallery-placeholder\'>Фото 4</span>';">
+                </div>
+                <div class="gallery-item">
+                    <img src="it/photo_5.jpg" alt="Фото 5" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'gallery-placeholder\'>Фото 5</span>';">
+                </div>
+                <div class="gallery-item">
+                    <img src="it/photo_6.jpg" alt="Фото 6" onerror="this.style.display='none'; this.parentElement.innerHTML='<span class=\'gallery-placeholder\'>Фото 6</span>';">
+                </div>
+            </div>
+        </section>
+
+        <!-- РАЗДЕЛ: УСЛУГИ -->
+        <section id="services">
+            <h2 class="section-title">Услуги</h2>
+
+            <!-- 9 карточек (без галереи) -->
+            <div class="cards-grid">
+                <article class="card">
+                    <div class="card-icon">1</div>
+                    <h3>Индивидуальные уроки</h3>
+                    <p>Персональные занятия по предметам с учётом уровня подготовки и целей обучающегося.</p>
+                </article>
+                <article class="card">
+                    <div class="card-icon">2</div>
+                    <h3>Групповые занятия</h3>
+                    <p>Мини-группы до 6 человек для совместной подготовки к экзаменам и олимпиадам.</p>
+                </article>
+                <article class="card">
+                    <div class="card-icon">3</div>
+                    <h3>Создание лендингов</h3>
+                    <p>Разработка современных одностраничных сайтов для бизнеса и личного бренда.</p>
+                </article>
+                <article class="card">
+                    <div class="card-icon">4</div>
+                    <h3>Аудит IT-инфраструктуры</h3>
+                    <p>Анализ существующей инфраструктуры и рекомендации по оптимизации и безопасности.</p>
+                </article>
+                <article class="card">
+                    <div class="card-icon">5</div>
+                    <h3>Настройка рабочих мест</h3>
+                    <p>Развёртывание компьютеров, периферии и программного обеспечения для сотрудников.</p>
+                </article>
+                <article class="card">
+                    <div class="card-icon">6</div>
+                    <h3>Консультации по цифровизации</h3>
+                    <p>Помощь в выборе и внедрении программных продуктов для автоматизации процессов.</p>
+                </article>
+                <article class="card">
+                    <div class="card-icon">7</div>
+                    <h3>Мастер-классы для педагогов</h3>
+                    <p>Проведение семинаров по внедрению цифровых инструментов в образовательный процесс.</p>
+                </article>
+                <article class="card">
+                    <div class="card-icon">8</div>
+                    <h3>Разработка Telegram-ботов</h3>
+                    <p>Создание ботов для автоматизации записи, рассылки и интеграции с внешними сервисами.</p>
+                </article>
+                <article class="card">
+                    <div class="card-icon">9</div>
+                    <h3>Ремонт и апгрейд ПК</h3>
+                    <p>Диагностика неисправностей, замена комплектующих и модернизация компьютеров и ноутбуков.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- РАЗДЕЛ: КОНТАКТЫ -->
+        <section id="contacts">
+            <div class="contacts-section">
+                <h2>Контакты</h2>
+                <div class="contacts-grid">
+                    <div class="contact-item">
+                        <div class="contact-icon">@</div>
+                        <a href="mailto:email@example.com">email@example.com</a>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">VK</div>
+                        <a href="https://vk.com/username" target="_blank" rel="noopener">vk.com/username</a>
+                    </div>
+                </div>
+
+                <!-- Форма обратной связи -->
+                <div class="contact-form-wrapper">
+                    <form class="contact-form" id="feedbackForm" novalidate>
+                        <div class="form-group">
+                            <label for="name">Ваше имя</label>
+                            <input type="text" id="name" name="name" placeholder="Введите ваше имя" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Электронная почта</label>
+                            <input type="email" id="email" name="email" placeholder="example@mail.ru" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Тема обращения</label>
+                            <select id="subject" name="subject" required>
+                                <option value="" disabled selected>Выберите тему</option>
+                                <option value="pedagogy">Педагогическая деятельность</option>
+                                <option value="it">IT-услуги</option>
+                                <option value="lesson">Запись на занятие</option>
+                                <option value="other">Другое</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Сообщение</label>
+                            <textarea id="message" name="message" placeholder="Опишите ваш вопрос или предложение..." required></textarea>
+                        </div>
+                        <button type="submit" class="form-submit">Отправить сообщение</button>
+                        <div class="form-message" id="formMessage"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ФУТЕР: КОПИРАЙТ -->
+    <footer>
+        <p>© 2026 Персональная визитка. Все права защищены.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        // === ИНИЦИАЛИЗАЦИЯ EMAILJS ===
+        // ЗАМЕНИТЕ 'YOUR_PUBLIC_KEY' на ваш публичный ключ из панели EmailJS (Account -> API Keys)
+        emailjs.init('YOUR_PUBLIC_KEY');
+
+        // === ПЛАВНАЯ ПРОКРУТКА С УЧЁТОМ ВЫСОТЫ ШАПКИ ===
+        document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (!targetElement) return;
+
+                const headerHeight = document.querySelector('header').offsetHeight;
+                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight - 16;
+
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // === ОБРАБОТКА ФОРМЫ ЧЕРЕЗ EMAILJS ===
+        (function () {
+            const form = document.getElementById('feedbackForm');
+            const messageEl = document.getElementById('formMessage');
+
+            // ЗАМЕНИТЕ на ваши ID из панели EmailJS:
+            // SERVICE_ID — ID email-сервиса (например, 'gmail', 'mailgun' и т.д.)
+            // TEMPLATE_ID — ID шаблона письма (Email Templates)
+            const SERVICE_ID = 'YOUR_SERVICE_ID';
+            const TEMPLATE_ID = 'YOUR_TEMPLATE_ID';
+
+            function showMessage(text, isError) {
+                messageEl.textContent = text;
+                messageEl.className = 'form-message ' + (isError ? 'error' : 'success');
+            }
+
+            function clearErrors() {
+                messageEl.className = 'form-message';
+                messageEl.textContent = '';
+                form.querySelectorAll('.error-field').forEach(el => el.classList.remove('error-field'));
+            }
+
+            function validate() {
+                let valid = true;
+                const fields = ['name', 'email', 'subject', 'message'];
+
+                fields.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (!el.value.trim()) {
+                        el.classList.add('error-field');
+                        valid = false;
+                    } else {
+                        el.classList.remove('error-field');
+                    }
+                });
+
+                // Проверка email
+                const email = document.getElementById('email');
+                const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (email.value.trim() && !emailPattern.test(email.value.trim())) {
+                    email.classList.add('error-field');
+                    showMessage('Введите корректный адрес электронной почты.', true);
+                    return false;
+                }
+
+                if (!valid) {
+                    showMessage('Пожалуйста, заполните все обязательные поля.', true);
+                }
+                return valid;
+            }
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                clearErrors();
+
+                if (!validate()) return;
+
+                const submitBtn = form.querySelector('.form-submit');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Отправка...';
+                submitBtn.disabled = true;
+
+                // Отправка формы через EmailJS
+                emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form)
+                    .then(function () {
+                        showMessage('Спасибо! Ваше сообщение отправлено. Я свяжусь с вами в ближайшее время.', false);
+                        form.reset();
+                    })
+                    .catch(function (error) {
+                        console.error('EmailJS error:', error);
+                        showMessage('Ошибка отправки. Пожалуйста, попробуйте позже или свяжитесь напрямую по email.', true);
+                    })
+                    .finally(function () {
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                    });
+            });
+
+            // Убираем ошибку при вводе
+            ['name', 'email', 'subject', 'message'].forEach(id => {
+                document.getElementById(id).addEventListener('input', function () {
+                    this.classList.remove('error-field');
+                });
+            });
+        })();
+
+        // === ВИДЖЕТ ТЕСТИРОВАНИЯ АДАПТИВНОСТИ ===
+        // Показывает текущее разрешение и активный breakpoint. Двойной клик — скрыть.
+        (function () {
+            const widget = document.createElement('div');
+            widget.id = 'responsive-test';
+            widget.style.cssText = 'position:fixed;bottom:16px;right:16px;z-index:9999;background:rgba(30,41,59,0.9);color:#fff;padding:10px 14px;border-radius:8px;font-family:monospace;font-size:12px;line-height:1.5;cursor:pointer;user-select:none;backdrop-filter:blur(4px);';
+
+            function update() {
+                const w = window.innerWidth;
+                let bp = 'Desktop (>1024px)';
+                if (w <= 640) bp = 'Small Mobile (≤640px)';
+                else if (w <= 768) bp = 'Mobile (≤768px)';
+                else if (w <= 1024) bp = 'Tablet (≤1024px)';
+                widget.innerHTML = `${w}px × ${window.innerHeight}px<br><strong>${bp}</strong><br><small>Двойной клик — скрыть</small>`;
+            }
+
+            widget.addEventListener('dblclick', () => widget.remove());
+            window.addEventListener('resize', update);
+            document.body.appendChild(widget);
+            update();
+        })();
+    </script>
+
+</body>
+</html>
