@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<title>Персональная визитка учителя / Технического специалиста</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>/* стили, как описано в задаче */
+:root{--header-height:80px;--footer-height:60px;--primary-gradient:linear-gradient(270deg,#ff7e5f,#feb47b,#6a3093,#a044ff);--card-bg:#ffffff;--card-shadow:rgba(0,0,0,0.1) 0 4px 12px;--link-color:#0066cc}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.6;color:#333;background:#f9fafb;padding-top:var(--header-height);padding-bottom:var(--footer-height)}
+header{position:fixed;top:0;left:0;right:0;height:var(--header-height);background:var(--primary-gradient);display:flex;align-items:center;justify-content:space-between;padding:0 20px;z-index:1000;animation:gradientShift 15s ease infinite}
+@keyframes gradientShift{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+header .logo{font-size:1.8rem;color:#fff;font-weight:bold}
+nav ul{list-style:none;display:flex;gap:20px}
+nav a{color:#fff;text-decoration:none;font-weight:500;position:relative}
+nav a::after{content:"";position:absolute;left:0;bottom:-4px;width:100%;height:2px;background:#fff;transform:scaleX(0);transition:transform 0.3s ease}
+nav a:hover::after{transform:scaleX(1)}
+.portrait{width:60px;height:60px;border-radius:50%;background-image:url('0_photo_portret.jpg');background-size:cover;background-position:center;border:3px solid #fff}
+section{max-width:1200px;margin:40px auto;padding:0 20px}
+section h2{font-size:2rem;margin-bottom:20px;text-align:center;position:relative}
+section h2::after{content:"";width:80px;height:3px;background:var(--link-color);position:absolute;left:50%;bottom:-10px;transform:translateX(-50%)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px;margin-top:30px}
+.card{background:var(--card-bg);padding:20px;border-radius:8px;box-shadow:var(--card-shadow);transition:transform 0.3s ease}
+.card:hover{transform:translateY(-5px)}
+.card h3{font-size:1.2rem;margin-bottom:10px}
+.card p{font-size:0.95rem;color:#555}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-top:30px}
+.gallery img{width:100%;height:100%;object-fit:cover;border-radius:4px;box-shadow:var(--card-shadow)}
+footer{background:#fff;height:var(--footer-height);display:flex;align-items:center;justify-content:space-between;padding:0 20px;border-top:1px solid #e5e7eb;font-size:0.9rem}
+.footer-links a{color:var(--link-color);text-decoration:none;margin-right:15px;display:inline-flex;align-items:center}
+.footer-links a svg{width:18px;height:18px;margin-right:5px;fill:var(--link-color)}
+.copyright{color:#777}
+@media(max-width:600px){footer{flex-direction:column;height:auto;padding:15px} .footer-links{margin-bottom:10px}}</style>
+</head>
+<body>
+<header>
+<div class="logo">Моя визитка</div>
+<nav>
+<ul>
+<li><a href="#pedagogy">Педагогическая деятельность</a></li>
+<li><a href="#it">ИТ компетенции</a></li>
+<li><a href="#services">Услуги</a></li>
+</ul>
+</nav>
+<div class="portrait"></div>
+</header>
+<main>
+<section id="pedagogy">
+<h2>Педагогическая деятельность</h2>
+<div class="cards">
+<div class="card"><h3>Обучение младших классов</h3><p>Описание работы с детьми 6–9 лет, методики и подходы.</p></div>
+<div class="card"><h3>Профессиональная подготовка учителей</h3><p>Консультации, семинары и курсы для коллег.</p></div>
+<div class="card"><h3>Методика дистанционного обучения</h3><p>Разработка онлайн‑курсов и работа с платформами.</p></div>
+<div class="card"><h3>Интеграция ИКТ в учебный процесс</h3><p>Подбор и настройка оборудования, обучающие программы.</p></div>
+<div class="card"><h3>Методика проектного обучения</h3><p>Организация учебных проектов, работа в группах.</p></div>
+<div class="card"><h3>Развитие критического мышления</h3><p>Сессии и упражнения, направленные на аналитическое мышление.</p></div>
+<div class="card"><h3>Педагогический супервизор</h3><p>Наблюдение и обратная связь учителям.</p></div>
+<div class="card"><h3>Участие в научных исследованиях</h3><p>Методы сбора данных, анализ и публикация.</p></div>
+<div class="card"><h3>События и культурные программы</h3><p>Организация выставок, концертов, экскурсий.</p></div>
+</div>
+<h3 style="text-align:center;margin-top:30px;">Галерея фото</h3>
+<div class="gallery">
+<img src="https://via.placeholder.com/150" alt="Фото 1">
+<img src="https://via.placeholder.com/150" alt="Фото 2">
+<img src="https://via.placeholder.com/150" alt="Фото 3">
+<img src="https://via.placeholder.com/150" alt="Фото 4">
+<img src="https://via.placeholder.com/150" alt="Фото 5">
+<img src="https://via.placeholder.com/150" alt="Фото 6">
+</div>
+</section>
+<section id="it">
+<h2>ИТ компетенции</h2>
+<div class="cards">
+<div class="card"><h3>Разработка веб‑приложений</h3><p>Создание сайтов, SPA, серверных сервисов.</p></div>
+<div class="card"><h3>Мобильная разработка</h3><p>iOS и Android приложения, кросс‑платформенные фреймворки.</p></div>
+<div class="card"><h3>Администрирование серверов</h3><p>Настройка Linux/Windows серверов, безопасность.</p></div>
+<div class="card"><h3>Облачные решения</h3><p>Работа с AWS, Azure, GCP, миграция и управление ресурсами.</p></div>
+<div class="card"><h3>Сетевые технологии</h3><p>Проектирование и настройка LAN/WAN, VPN, Wi‑Fi.</p></div>
+<div class="card"><h3>Базы данных</h3><p>Проектирование, оптимизация, администрирование SQL/NoSQL.</p></div>
+<div class="card"><h3>Кибербезопасность</h3><p>Аудит, тестирование на проникновение, обучение.</p></div>
+<div class="card"><h3>Data Science и машинное обучение</h3><p>Анализ данных, построение моделей.</p></div>
+<div class="card"><h3>ИТ‑поддержка и консалтинг</h3><p>Решение инцидентов, оптимизация процессов.</p></div>
+</div>
+<h3 style="text-align:center;margin-top:30px;">Галерея фото</h3>
+<div class="gallery">
+<img src="https://via.placeholder.com/150" alt="Фото 1">
+<img src="https://via.placeholder.com/150" alt="Фото 2">
+<img src="https://via.placeholder.com/150" alt="Фото 3">
+<img src="https://via.placeholder.com/150" alt="Фото 4">
+<img src="https://via.placeholder.com/150" alt="Фото 5">
+<img src="https://via.placeholder.com/150" alt="Фото 6">
+</div>
+</section>
+<section id="services">
+<h2>Услуги</h2>
+<div class="cards">
+<div class="card"><h3>Педагогический коучинг</h3><p>Индивидуальные сессии и программы развития учителей.</p></div>
+<div class="card"><h3>Разработка учебных программ</h3><p>Создание структурированных программ по разным предметам.</p></div>
+<div class="card"><h3>Курсы по ИКТ для учителей</h3><p>Обучение работе с образовательными цифровыми инструментами.</p></div>
+<div class="card"><h3>Организация образовательных мероприятий</h3><p>Конференции, вебинары, воркшопы.</p></div>
+<div class="card"><h3>ИТ‑поддержка школ</h3><p>Техническое сопровождение сети, оборудования, ПО.</p></div>
+<div class="card"><h3>Внедрение образовательных платформ</h3><p>Выбор, настройка, обучение пользователей.</p></div>
+<div class="card"><h3>Консалтинг по цифровой трансформации</h3><p>Анализ процессов, стратегии, план внедрения.</p></div>
+<div class="card"><h3>Обучение родителей и учеников</h3><p>Курсы по безопасному использованию интернета.</p></div>
+<div class="card"><h3>Разработка мобильных приложений для школ</h3><p>Приложения для учета посещаемости, домашней работы.</p></div>
+</div>
+</section>
+</main>
+<footer>
+<div class="footer-links">
+<a href="mailto:email@example.com"><svg viewBox="0 0 512 512"><path d="M502.3 190.8c12-24.7 1.9-55.6-23.9-68.5L352 64c-30.9-15.5-66.1-15.5-97 0L73.6 122.3c-25.8 12.9-36 43.8-23.9 68.5l12.1 23.8c5 9.9 16.2 15.4 27.6 13.2L112 192v224c0 26.5 21.5 48 48 48h224c26.5 0 48-21.5 48-48V192l-32 .2c-11.4 2.2-22.6-3.3-27.6-13.2l-12.1-23.8zM464 416H48V128l176-48 176 48v288z"/></svg>email@example.com</a>
+<a href="https://vk.com/yourprofile" target="_blank"><svg viewBox="0 0 448 512"><path d="M400.5 32H47.5C21.4 32 0 53.4 0 79.5v353c0 26.1 21.4 47.5 47.5 47.5h136.4c-1.4-15.6-2.2-31.4-2.2-47.4 0-116.8 71-168.7 136.6-168.7 39.3 0 71.4 14.9 88.5 24.8V32z"/></svg>ВКонтакте</a>
+</div>
+<div class="copyright">© 2024 Ваше имя. Все права защищены.</div>
+</footer>
+</body>
+</html>

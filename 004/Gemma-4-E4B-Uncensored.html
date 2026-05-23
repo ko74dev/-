@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Визитка: Учитель и Технический Специалист</title>
+    <style>
+        /* --- CSS Переменные --- */
+        :root {
+            --primary-color: #007bff; /* Яркий синий для акцентов */
+            --secondary-color: #6c757d; /* Серый для текста */
+            --background-light: #f8f9fa; /* Очень светлый фон */
+            --text-dark: #212529;
+            --white: #ffffff;
+            --gradient-start: #e0f7fa; /* Светло-голубой */
+            --gradient-end: #b3e5fc;   /* Более насыщенный голубой */
+        }
+
+        /* --- Базовый сброс и Типографика --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--background-light);
+            /* Анимированный градиентный фон */
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        h1, h2, h3 {
+            color: #0056b3;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 60px;
+            font-size: 2.2em;
+            position: relative;
+        }
+        h2::after {
+            content: '';
+            width: 60px;
+            height: 4px;
+            background: var(--primary-color);
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        /* --- Шапка и Навигация (Header & Nav) --- */
+        header {
+            background: var(--white);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+        }
+
+        .photo-portrait {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 4px solid var(--primary-color);
+            object-fit: cover;
+            margin-right: 15px;
+            /* Добавим легкую анимацию */
+            transition: transform 0.3s ease;
+        }
+        .photo-portrait:hover {
+            transform: scale(1.05) rotate(3deg);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            padding: 5px 10px;
+            transition: color 0.2s, border-bottom 0.2s;
+            border-bottom: 2px solid transparent;
+        }
+
+        nav a:hover {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        /* --- Карточки (Cards) --- */
+        .card-grid {
+            display: grid;
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-top: 4px solid var(--primary-color);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* --- Галерея (Gallery) --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .gallery-item {
+            height: 150px;
+            background-color: #e9ecef;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease;
+        }
+        .gallery-item:hover {
+            transform: scale(1.03);
+        }
+        .gallery-placeholder {
+            width: 90%;
+            height: 90%;
+            background-color: #ced4da;
+            border-radius: 5px;
+            /* Для имитации фото */
+        }
+
+        /* --- Секции --- */
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        /* Секция Услуг не имеет галереи, просто сетка */
+        .services-section .card-grid {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        /* --- Футер (Footer) --- */
+        footer {
+            background: var(--text-dark);
+            color: var(--background-light);
+            padding: 40px 0 20px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: color 0.2s;
+            margin: 0 15px;
+        }
+
+        .contact-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .copyright {
+            margin-top: 20px;
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        /* --- Адаптивность (Media Queries) --- */
+        @media (max-width: 992px) {
+            .nav-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            .logo-area {
+                justify-content: center;
+                margin-bottom: 15px;
+            }
+            nav ul {
+                padding-top: 10px;
+                justify-content: center;
+            }
+            h2 {
+                font-size: 1.8em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 50px 0;
+            }
+            .card-grid, .gallery-grid {
+                gap: 20px;
+            }
+            .card {
+                padding: 20px;
+            }
+            .photo-portrait {
+                width: 60px;
+                height: 60px;
+                margin-right: 10px;
+            }
+            .nav-content {
+                 /* Убеждаемся, что на очень маленьких экранах навигация не сжимается слишком сильно */
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-content {
+                flex-direction: column;
+                gap: 10px;
+            }
+            nav ul {
+                flex-wrap: wrap; /* Разрешаем навигации переноситься */
+                justify-content: center;
+            }
+            .card-grid {
+                grid-template-columns: 1fr; /* Все карточки в один столбец */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ШАПКА И НАВИГАЦИЯ -->
+    <header>
+        <div class="container nav-content">
+            <div class="logo-area">
+                <!-- Кружочек для фотопортрета -->
+                <img src="0_photo_portret.jpg" alt="Фотопортрет специалиста" class="photo-portrait">
+                <div class="logo">
+                    <h1>[Имя Фамилия]</h1>
+                    <p style="font-size: 0.9em; color: var(--secondary-color); margin-top: -5px;">Учитель & IT-Эксперт</p>
+                </div>
+            </div>
+            <!-- Навигация -->
+            <nav>
+                <ul>
+                    <li><a href="#pedagogy">Педагогика</a></li>
+                    <li><a href="#it-competencies">ИТ Компетенции</a></li>
+                    <li><a href="#services">Услуги</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- РАЗДЕЛ 1: ПЕДАГОГИЧЕСКАЯ ДЕЯТЕЛЬНОСТЬ -->
+        <section id="pedagogy">
+            <div class="container">
+                <h2>📚 Педагогическая деятельность</h2>
+                
+                <!-- Галерея (6 фото) -->
+                <div class="gallery-grid">
+                    <div class="gallery-item"><div class="gallery-placeholder">Фото 1</div></div>
+                    <div class="gallery-item"><div class="gallery-placeholder">Фото 2</div></div>
+                    <div class="gallery-item"><div class="gallery-placeholder">Фото 3</div></div>
+                    <div class="gallery-item"><div class="gallery-placeholder">Фото 4</div></div>
+                    <div class="gallery-item"><div class="gallery-placeholder">Фото 5</div></div>
+                    <div class="gallery-item"><div class="gallery-placeholder">Фото 6</div></div>
+                </div>
+
+                <!-- Карточки (9 карточек) -->
+                <div class="card-grid" style="margin-top: 40px;">
+                    <!-- Карточка 1 -->
+                    <div class="card">
+                        <h3>Онлайн-уроки</h3>
+                        <p>Индивидуальные занятия по предметам школьной программы в удобном для Вас формате.</p>
+                    </div>
+                    <!-- Карточка 2 -->
+                    <div class="card">
+                        <h3>Подготовка к ОГЭ/ЕГЭ</h3>
+                        <p>Системная отработка тем и практика сдачи экзаменационных работ.</p>
+                    </div>
+                    <!-- Карточка 3 -->
+                    <div class="card">
+                        <h3>Коррекционная работа</h3>
+                        <p>Помощь ученикам с трудностями в обучении (дислексия, СДВГ и др.).</p>
+                    </div>
+                    <!-- Карточка 4 -->
+                    <div class="card">
+                        <h3>Тьюторство</h3>
+                        <p>Помощь в выполнении домашних заданий и освоении сложных тем.</p>
+                    </div>
+                    <!-- Карточка 5 -->
+                    <div class="card">
+                        <h3>Мастер-классы</h3>
+                        <p>Групповые занятия по интерактивному изучению предмета.</p>
+                    </div>
+                    <!-- Карточка 6 -->
+                    <div class="card">
+                        <h3>Методические консультации</h3>
+                        <p>Советы для родителей и учителей по ведению учебного процесса.</p>
+                    </div>
+                    <!-- Карточка 7 -->
+                    <div class="card">
+                        <h3>Программирование для детей</h3>
+                        <p>Введение в логику и основы кодирования с раннего возраста.</p>
+                    </div>
+                    <!-- Карточка 8 -->
+                    <div class="card">
+                        <h3>Работа с проектами</h3>
+                        <p>Помощь в реализации учебных или творческих проектов.</p>
+                    </div>
+                    <!-- Карточка 9 -->
+                    <div class="card">
+                        <h3>Индивидуальный план</h3>
+                        <p>Создание траектории обучения под конкретные цели и темп ученика.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- РАЗДЕЛ 2: ИТ КОМПЕТЕНЦИИ -->
+        <section id="it-competencies" style="background-color: var(--background-light); border-bottom-color: #e9ecef;">
+            <div class="container">
+                <h2>💻 ИТ Компетенции</h2>
+                
+                <!-- Галерея (6 фото) -->
+                <div class="gallery-grid">
+                    <div class="gallery-item"><div class="gallery-placeholder">Проект A</div></div>
+                    <div class="gallery-item"><div class="gallery-placeholder">Код B</div></div>
+                    <div class="gallery-item"><div class="gallery-placeholder">DevC</div></div>
+                    <div class="gallery-item"><div class="gallery-placeholder">Meeting C</div></div>
+                    <div class="gallery-item"><div class="gallery-placeholder">UI/UX D</div></div>
+                    <div class="gallery-item"><div class="gallery-placeholder">Server E</div></div>
+                </div>
+
+                <!-- Карточки (9 карточек) -->
+                <div class="card-grid" style="margin-top: 40px;">
+                    <!-- Карточка 1 -->
+                    <div class="card">
+                        <h3>Python (Backend)</h3>
+                        <p>Django, Flask, разработка API, автоматизация.</p>
+                    </div>
+                    <!-- Карточка 2 -->
+                    <div class="card">
+                        <h3>JavaScript/React</h3>
+                        <p>Создание современных SPA, управление состоянием, Hooks.</p>
+                    </div>
+                    <!-- Карточка 3 -->
+                    <div class="card">
+                        <h3>SQL / PostgreSQL</h3>
+                        <p>Оптимизация запросов, работа со сложными базами данных.</p>
+                    </div>
+                    <!-- Карточка 4 -->
+                    <div class="card">
+                        <h3>HTML5/CSS3</h3>
+                        <p>Семантическая верстка, адаптивный дизайн, препроцессоры (SASS).</p>
+                    </div>
+                    <!-- Карточка 5 -->
+                    <div class="card">
+                        <h3>DevOps (Базовый)</h3>
+                        <p>Docker, Git, CI/CD конвейеры.</p>
+                    </div>
+                    <!-- Карточка 6 -->
+                    <div class="card">
+                        <h3>Frontend Архитектура</h3>
+                        <p>Понимание паттернов (MVC, MVVM), чистый код.</p>
+                    </div>
+                    <!-- Карточка 7 -->
+                    <div class="card">
+                        <h3>Аналитика данных</h3>
+                        <p>Сбор, обработка и визуализация данных.</p>
+                    </div>
+                    <!-- Карточка 8 -->
+                    <div class="card">
+                        <h3>Облачные сервисы</h3>
+                        <p>Опыт работы с AWS/Yandex Cloud (базовый уровень).</p>
+                    </div>
+                    <!-- Карточка 9 -->
+                    <div class="card">
+                        <h3>Алгоритмы и структуры</h3>
+                        <p>Решение сложных задач, анализ временной сложности (Big O).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- РАЗДЕЛ 3: УСЛУГИ -->
+        <section id="services">
+            <div class="container services-section">
+                <h2>🛠️ Услуги</h2>
+                
+                <!-- Карточки (9 карточек, без галереи) -->
+                <div class="card-grid">
+                    <!-- Услуга 1 -->
+                    <div class="card">
+                        <h3>Индивидуальное репетиторство</h3>
+                        <p>Целенаправленная работа над пробелами в знаниях по школьной программе.</p>
+                    </div>
+                    <!-- Услуга 2 -->
+                    <div class="card">
+                        <h3>Разработка MVP</h3>
+                        <p>Быстрый запуск минимально жизнеспособного продукта (веб-сайт, сервис).</p>
+                    </div>
+                    <!-- Услуга 3 -->
+                    <div class="card">
+                        <h3>Аудит кода</h3>
+                        <p>Глубокий анализ существующего кода на предмет ошибок, стилистики и производительности.</p>
+                    </div>
+                    <!-- Услуга 4 -->
+                    <div class="card">
+                        <h3>Веб-дизайн от концепта</h3>
+                        <p>Создание структуры и визуального стиля лендинга или сайта.</p>
+                    </div>
+                    <!-- Услуга 5 -->
+                    <div class="card">
+                        <h3>Обучение кодингу</h3>
+                        <p>Проведение курсов для новичков (React, JS, Python).</p>
+                    </div>
+                    <!-- Услуга 6 -->
+                    <div class="card">
+                        <h3>Автоматизация процессов</h3>
+                        <p>Написание скриптов для рутинных задач (Excel, отчеты, парсинг).</p>
+                    </div>
+                    <!-- Услуга 7 -->
+                    <div class="card">
+                        <h3>Консультации по IT</h3>
+                        <p>Экспертное мнение по выбору стека технологий для нового проекта.</p>
+                    </div>
+                    <!-- Услуга 8 -->
+                    <div class="card">
+                        <h3>Подготовка к собеседованиям</h3>
+                        <p>Моделирование реальных интервью по техническим и поведенческим вопросам.</p>
+                    </div>
+                    <!-- Услуга 9 -->
+                    <div class="card">
+                        <h3>Внедрение плагинов/API</h3>
+                        <p>Интеграция сторонних сервисов (CRM, платежные шлюзы) в ваш проект.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ФУТЕР -->
+    <footer>
+        <div class="container footer-content">
+            <!-- Контакты -->
+            <div class="contact-links">
+                <a href="mailto:example@teacher.com">✉️ Email</a>
+                <a href="https://vk.com/yourprofile">VK</a>
+            </div>
+            <!-- Копирайт -->
+            <div class="copyright">&copy; <span id="current-year"></span> [Имя Фамилия]. Все права защищены. Создано с любовью к коду и детям.</div>
+        </div>
+    </footer>
+
+    <script>
+        // Автоматическое определение года в копирайт
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Простая анимация появления контента (по желанию)
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.style.opacity = 0;
+            document.body.style.transition = 'opacity 1s ease-out';
+            document.body.style.opacity = 1;
+        });
+    </script>
+</body>
+</html>

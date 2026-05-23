@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Персональная визитка учителя и технического специалиста</title>
+    <style>
+        :root {
+            --primary-color: #4f46e5;
+            --secondary-color: #8b5cf6;
+            --accent-color: #06b6d4;
+            --light-bg: #f9fafb;
+            --text-primary: #1f2937;
+            --text-secondary: #4b5563;
+            --border-radius: 1rem;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--light-bg);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Шапка */
+        .header {
+            padding: 1.5rem 0;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            z-index: 1;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(90deg, #ffffff, #e0e7ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            transition: var(--transition);
+        }
+
+        .nav a:hover {
+            color: #ffffff;
+        }
+
+        .nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Кружочек для фото */
+        .photo-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 3px solid var(--primary-color);
+            box-shadow: var(--shadow-md);
+            cursor: pointer;
+            transition: var(--transition);
+            margin-left: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-circle::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.2), transparent 60%);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .photo-circle:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .photo-circle:hover::after {
+            opacity: 1;
+        }
+
+        /* Основной контент */
+        .main-content {
+            padding: 4rem 0;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(79, 70, 229, 0.03), rgba(147, 92, 246, 0.03));
+            z-index: 1;
+        }
+
+        .section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+            font-weight: 700;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        /* Карточки деятельности */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: white;
+            padding: 1.8rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.7;
+        }
+
+        /* Галерея фото */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.8rem;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Услуги */
+        .services {
+            margin-top: 0;
+        }
+
+        .services .cards-grid {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .services .card {
+            border-left: 4px solid var(--accent-color);
+        }
+
+        /* Контакты */
+        .contact-section {
+            background: var(--light-bg);
+            padding: 4rem 2rem;
+            text-align: center;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            margin-top: 2rem;
+        }
+
+        .contact-section h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            font-weight: 700;
+        }
+
+        .contact-info {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .contact-info a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Копирайт */
+        .copyright {
+            text-align: center;
+            padding: 2rem 0;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            border-top: 1px solid #e5e7eb;
+            margin-top: 2rem;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav {
+                gap: 1rem;
+                margin-top: 1rem;
+            }
+
+            .photo-circle {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+
+            .section {
+                padding: 2rem 1.5rem;
+            }
+
+            .section h2 {
+                font-size: 1.8rem;
+            }
+
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-section {
+                padding: 2rem 1rem;
+            }
+
+            .contact-info {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <div class="logo">Учитель & Специалист</div>
+            <nav class="nav">
+                <a href="#pedagogy">Педагогическая деятельность</a>
+                <a href="#it-competencies">ИТ компетенции</a>
+                <a href="#services">Услуги</a>
+            </nav>
+            <div class="photo-circle" onclick="alert('Фото портрета')">
+                <img src="images/0_photo_portret.jpg" alt="Фото портрета" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <section id="pedagogy" class="section">
+            <h2>Педагогическая деятельность</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Обучение математике</h3>
+                    <p>Провожу индивидуальные занятия по математике для учащихся 5–11 классов с акцентом на логическое мышление и решение задач.</p>
+                </div>
+                <div class="card">
+                    <h3>Работа с русским языком</h3>
+                    <p>Помогаю улучшить грамматику, письменную речь и подготовку к ЕГЭ по русскому языку.</p>
+                </div>
+                <div class="card">
+                    <h3>Подготовка к олимпиадам</h3>
+                    <p>Работаю над математическими и логическими задачами для школьников, участвующих в олимпиадах.</p>
+                </div>
+                <div class="card">
+                    <h3>Работа с детьми с ОВЗ</h3>
+                    <p>Организую индивидуальные занятия для детей с нарушениями развития и особенностями восприятия.</p>
+                </div>
+                <div class="card">
+                    <h3>Интеграция в школу</h3>
+                    <p>Помогаю новым ученикам адаптироваться к школьной среде и налаживать контакт с одноклассниками.</p>
+                </div>
+                <div class="card">
+                    <h3>Работа с родителями</h3>
+                    <p>Организую встречи с родителями для обсуждения прогресса ученика и планирования обучения.</p>
+                </div>
+                <div class="card">
+                    <h3>Работа с мотивацией</h3>
+                    <p>Нахожу индивидуальные пути повышения мотивации у учащихся, особенно в сложных дисциплинах.</p>
+                </div>
+                <div class="card">
+                    <h3>Развитие критического мышления</h3>
+                    <p>Провожу занятия по анализу текстов, аргументации и построению логических цепочек.</p>
+                </div>
+                <div class="card">
+                    <h3>Подготовка к экзаменам</h3>
+                    <p>Помогаю подготовиться к итоговым и вступительным экзаменам с индивидуальными методами.</p>
+                </div>
+            </div>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="images/photo1.jpg" alt="Фото 1">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/photo2.jpg" alt="Фото 2">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/photo3.jpg" alt="Фото 3">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/photo4.jpg" alt="Фото 4">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/photo5.jpg" alt="Фото 5">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/photo6.jpg" alt="Фото 6">
+                </div>
+            </div>
+        </section>
+
+        <section id="it-competencies" class="section">
+            <h2>ИТ компетенции</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Работа с базами данных</h3>
+                    <p>Нахожу и анализирую данные из различных источников, строю отчёты и визуализирую результаты.</p>
+                </div>
+                <div class="card">
+                    <h3>Разработка скриптов</h3>
+                    <p>Создаю автоматизированные скрипты для обработки информации и упрощения рутинных задач.</p>
+                </div>
+                <div class="card">
+                    <h3>Работа с системами управления</h3>
+                    <p>Управляю серверами и системами хранения данных с высокой степенью надёжности.</p>
+                </div>
+                <div class="card">
+                    <h3>Анализ производительности</h3>
+                    <p>Оцениваю эффективность программ и систем, нахожу узкие места и оптимизирую.</p>
+                </div>
+                <div class="card">
+                    <h3>Работа с веб-интерфейсами</h3>
+                    <p>Разрабатываю и модерирую интерфейсы для удобства пользователей.</p>
+                </div>
+                <div class="card">
+                    <h3>Работа с облачными сервисами</h3>
+                    <p>Использую облачные платформы для хранения и обработки данных с высокой доступностью.</p>
+                </div>
+                <div class="card">
+                    <h3>Работа с API</h3>
+                    <p>Интегрирую различные сервисы через API для автоматизации взаимодействий.</p>
+                </div>
+                <div class="card">
+                    <h3>Обеспечение безопасности</h3>
+                    <p>Проверяю системы на уязвимости и внедряю меры защиты данных.</p>
+                </div>
+                <div class="card">
+                    <h3>Работа с DevOps</h3>
+                    <p>Организую процессы развертывания, мониторинга и управления изменениями.</p>
+                </div>
+            </div>
+            <div class="gallery">
+                <div class="gallery-item">
+                    <img src="images/photo7.jpg" alt="Фото 7">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/photo8.jpg" alt="Фото 8">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/photo9.jpg" alt="Фото 9">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/photo10.jpg" alt="Фото 10">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/photo11.jpg" alt="Фото 11">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/photo12.jpg" alt="Фото 12">
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="section">
+            <h2>Услуги</h2>
+            <div class="cards-grid">
+                <div class="card">
+                    <h3>Консультации по педагогике</h3>
+                    <p>Предоставляю индивидуальные консультации по методике преподавания и развитию учащихся.</p>
+                </div>
+                <div class="card">
+                    <h3>Обучение в IT-отрасли</h3>
+                    <p>Провожу курсы по основам программирования, веб-разработке и цифровым технологиям.</p>
+                </div>
+                <div class="card">
+                    <h3>Дистанционное обучение</h3>
+                    <p>Организую онлайн-курсы для учащихся и взрослых с использованием современных платформ.</p>
+                </div>
+                <div class="card">
+                    <h3>Разработка образовательных материалов</h3>
+                    <p>Создаю интерактивные и визуально привлекательные материалы для уроков.</p>
+                </div>
+                <div class="card">
+                    <h3>Подготовка презентаций</h3>
+                    <p>Помогаю создать эффективные презентации для уроков и встреч.</p>
+                </div>
+                <div class="card">
+                    <h3>Техническая поддержка</h3>
+                    <p>Обеспечиваю поддержку IT-инфраструктуры в школах и организациях.</p>
+                </div>
+                <div class="card">
+                    <h3>Аналитика и отчёты</h3>
+                    <p>Создаю статистические отчёты и визуализации для принятия решений.</p>
+                </div>
+                <div class="card">
+                    <h3>Обучение наставничеством</h3>
+                    <p>Провожу обучение молодых специалистов с акцентом на практический опыт.</p>
+                </div>
+                <div class="card">
+                    <h3>Комплексные программы обучения</h3>
+                    <p>Создаю индивидуальные образовательные программы с учётом целей ученика.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section class="contact-section">
+        <h3>Контакты</h3>
+        <div class="contact-info">
+            <a href="mailto:teacher@school.ru">teacher@school.ru</a>
+            <br>
+            <a href="https://vk.com/teacher" target="_blank">ВКонтакте</a>
+        </div>
+    </section>
+
+    <footer class="copyright">
+        &copy; 2025 Учитель & Специалист. Все права защищены.
+    </footer>
+</body>
+</html>

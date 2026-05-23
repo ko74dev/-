@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Персональная визитка - Педагог и ИТ-специалист</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1a1a2e;
+            background: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* Animated gradient background overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(255,105,180,0.1) 0%, rgba(52,152,219,0.1) 25%, rgba(154,205,50,0.1) 50%, rgba(255,193,7,0.1) 75%, rgba(202,114,198,0.1) 100%);
+            background-size: 400% 400%;
+            animation: gradientMove 15s ease infinite;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1a1a2e;
+            text-decoration: none;
+        }
+
+        .logo span {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav a {
+            color: #4a5568;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: #1a1a2e;
+        }
+
+        .nav a:hover::after {
+            width: 80%;
+        }
+
+        .nav a.active {
+            color: #1a1a2e;
+            font-weight: 600;
+        }
+
+        .nav a.active::after {
+            width: 80%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 150px 5% 100px;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .profile-photo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-photo:hover {
+            transform: scale(1.05);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: #718096;
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102,126,234,0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102,126,234,0.6);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            box-shadow: 0 4px 15px rgba(102,126,234,0.2);
+        }
+
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102,126,234,0.4);
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 100px 5%;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: #1a1a2e;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: #718096;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .grid-2-col {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-color: rgba(102,126,234,0.1);
+        }
+
+        .card-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #1a1a2e;
+        }
+
+        .card p {
+            font-size: 0.95rem;
+            color: #718096;
+            line-height: 1.7;
+        }
+
+        /* Gallery */
+        .gallery {
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            height: 200px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.02);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-color: rgba(102,126,234,0.1);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, rgba(102,126,234,0.1) 0%, rgba(118,75,162,0.1) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.5rem;
+            color: #667eea;
+        }
+
+        .service-card h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #1a1a2e;
+        }
+
+        .service-card p {
+            font-size: 0.9rem;
+            color: #718096;
+            line-height: 1.6;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.95) 100%);
+            padding: 100px 5%;
+            text-align: center;
+        }
+
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .contact-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+            border-color: rgba(102,126,234,0.2);
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .email-icon { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
+        .vk-icon { background: linear-gradient(135deg, #0077FF 0%, #0066CC 100%); color: white; }
+
+        .contact-info {
+            text-align: left;
+        }
+
+        .contact-label {
+            font-size: 0.85rem;
+            color: #718096;
+            margin-bottom: 0.25rem;
+        }
+
+        .contact-value {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #1a1a2e;
+        }
+
+        .contact-link {
+            color: #1a1a2e;
+            text-decoration: none;
+        }
+
+        .contact-link:hover {
+            color: #667eea;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a2e;
+            color: white;
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .footer-text {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .footer-logo span {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 0 3%;
+            }
+
+            .nav {
+                gap: 1rem;
+            }
+
+            .hero {
+                padding: 150px 3% 80px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 60px 3%;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .grid,
+            .grid-2-col,
+            .services-grid,
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-item {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .contact-info {
+                text-align: center;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+
+            .btn {
+                padding: 0.875rem 1.5rem;
+                font-size: 0.95rem;
+            }
+
+            .card,
+            .service-card {
+                padding: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.75rem;
+            }
+
+            .section-subtitle {
+                font-size: 1rem;
+            }
+        }
+
+        /* Smooth reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Scroll animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-reveal {
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        /* Card stagger animation */
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+        .card:nth-child(5) { animation-delay: 0.5s; }
+        .card:nth-child(6) { animation-delay: 0.6s; }
+        .card:nth-child(7) { animation-delay: 0.7s; }
+        .card:nth-child(8) { animation-delay: 0.8s; }
+        .card:nth-child(9) { animation-delay: 0.9s; }
+
+        @keyframes fadeInStagger {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .service-card:nth-child(1) { animation-delay: 0.1s; }
+        .service-card:nth-child(2) { animation-delay: 0.2s; }
+        .service-card:nth-child(3) { animation-delay: 0.3s; }
+        .service-card:nth-child(4) { animation-delay: 0.4s; }
+        .service-card:nth-child(5) { animation-delay: 0.5s; }
+        .service-card:nth-child(6) { animation-delay: 0.6s; }
+        .service-card:nth-child(7) { animation-delay: 0.7s; }
+        .service-card:nth-child(8) { animation-delay: 0.8s; }
+        .service-card:nth-child(9) { animation-delay: 0.9s; }
+
+        .service-card { animation: fadeInStagger 0.8s ease forwards; opacity: 0; }
+
+        /* Print styles */
+        @media print {
+            .nav, .hero-buttons {
+                display: none;
+            }
+            .section {
+                padding: 50px 5%;
+            }
+            .hero {
+                min-height: auto;
+                padding: 100px 5% 50px;
+            }
+            .contact-section {
+                background: white;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка с логотипом и навигацией -->
+    <header class="header">
+        <a href="#" class="logo">PROFESSIONAL<span>.</span></a>
+        <nav class="nav">
+            <a href="#about" class="nav-link active">О себе</a>
+            <a href="#education" class="nav-link">Педагогическая деятельность</a>
+            <a href="#it" class="nav-link">ИТ компетенции</a>
+            <a href="#services" class="nav-link">Услуги</a>
+            <a href="#contacts" class="nav-link">Контакты</a>
+        </nav>
+    </header>
+
+    <!-- Главный экран с фотографией -->
+    <section id="about" class="hero section-reveal">
+        <div class="hero-content">
+            <img src="0_photo_portret.jpg" alt="Персональная визитка учителя и технического специалиста" class="profile-photo" onerror="this.src='https://ui-avatars.com/api/?name=Иванов+Алексей&background=667eea&color=fff&size=400'">
+            <h1>Алексей Петрович<br>Иванов</h1>
+            <p>Квалифицированный педагог и профессиональный IT-специалист с более чем 15-летним опытом работы в сфере технического образования и разработки программного обеспечения.</p>
+            <div class="hero-buttons">
+                <a href="#contacts" class="btn btn-primary">Связаться со мной</a>
+                <a href="#services" class="btn btn-secondary">Подробнее об услугах</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Раздел педагогическая деятельность -->
+    <section id="education" class="section section-reveal">
+        <div class="section-header">
+            <h2 class="section-title">Педагогическая деятельность</h2>
+            <p class="section-subtitle">Мои профессиональные достижения и опыт в области технического образования</p>
+        </div>
+        <div class="grid">
+            <div class="card reveal">
+                <div class="card-icon">📚</div>
+                <h3>Методическая работа</h3>
+                <p>Создание и обновление методических пособий, разработка учебных программ и адаптация образовательного контента под современные требования.</p>
+            </div>
+            <div class="card reveal">
+                <div class="card-icon">💡</div>
+                <h3>Проектная деятельность</h3>
+                <p>Руководство студенческими проектами, проведение хакатонов и технических олимпиад, поддержка инновационных идей.</p>
+            </div>
+            <div class="card reveal">
+                <div class="card-icon">👥</div>
+                <h3>Менторство</h3>
+                <p>Индивидуальное и групповое менторство студентов, помощь в карьерном планировании и профессиональном развитии.</p>
+            </div>
+            <div class="card reveal">
+                <div class="card-icon">📊</div>
+                <h3>Аналитика и отчетность</h3>
+                <p>Подготовка аналитических отчетов, мониторинг образовательного процесса и оптимизация учебных процессов.</p>
+            </div>
+            <div class="card reveal">
+                <div class="card-icon">🎓</div>
+                <h3>Собеседования и отбор</h3>
+                <p>Проведение технических собеседований, оценка кандидатов и участие в формировании команды.</p>
+            </div>
+            <div class="card reveal">
+                <div class="card-icon">🔍</div>
+                <h3>Контроль и экспертиза</h3>
+                <p>Проверка и утверждение студенческих работ, проведение рецензий и финальных экзаменов.</p>
+            </div>
+            <div class="card reveal">
+                <div class="card-icon">📱</div>
+                <h3>Онлайн-обучение</h3>
+                <p>Создание и ведение дистанционных курсов, проведение вебинаров и интерактивных уроков.</p>
+            </div>
+            <div class="card reveal">
+                <div class="card-icon">🏆</div>
+                <h3>Конкурсы и олимпиады</h3>
+                <p>Организация участия студентов в профессиональных конкурсах, подготовка к финалам.</p>
+            </div>
+            <div class="card reveal">
+                <div class="card-icon">📝</div>
+                <h3>Документация и стандарты</h3>
+                <p>Разработка стандартов качества образовательных услуг, оформление технической документации.</p>
+            </div>
+        </div>
+        <div class="gallery section-reveal">
+            <div class="gallery-item reveal"><img src="1_education_1.jpg" alt="Фото педагогической деятельности 1" onerror="this.src='https://source.unsplash.com/400x300/?education,teacher'"></div>
+            <div class="gallery-item reveal"><img src="1_education_2.jpg" alt="Фото педагогической деятельности 2" onerror="this.src='https://source.unsplash.com/400x300/?university,student'"></div>
+            <div class="gallery-item reveal"><img src="1_education_3.jpg" alt="Фото педагогической деятельности 3" onerror="this.src='https://source.unsplash.com/400x300/?education,books'"></div>
+            <div class="gallery-item reveal"><img src="1_education_4.jpg" alt="Фото педагогической деятельности 4" onerror="this.src='https://source.unsplash.com/400x300/?meeting,presentation'"></div>
+            <div class="gallery-item reveal"><img src="1_education_5.jpg" alt="Фото педагогической деятельности 5" onerror="this.src='https://source.unsplash.com/400x300/?technology,education'"></div>
+            <div class="gallery-item reveal"><img src="1_education_6.jpg" alt="Фото педагогической деятельности 6" onerror="this.src='https://source.unsplash.com/400x300/?collaboration,learning'"></div>
+        </div>
+    </section>
+
+    <!-- Раздел ИТ компетенции -->
+    <section id="it" class="section section-reveal">
+        <div class="section-header">
+            <h2 class="section-title">ИТ компетенции</h2>
+            <p class="section-subtitle">Профессиональные навыки и технические области компетентности</p>
+        </div>
+        <div class="grid">
+            <div class="card reveal">
+                <div class="card-icon">💻</div>
+                <h3>Разработка ПО</h3>
+                <p>Разработка приложений и сервисов с использованием современных языков программирования и фреймворков.</p>
+            </div>
+            <div class="card reveal">
+                <div class="card-icon">🔧</div>
+                <h3>Тестирование и QA</h3>
+                <p>Проектирование и проведение тестов, написание автотестов и обеспечение качества программного обеспечения.</p>
+            </div>
+            <div class="card reveal">
+                <div class="card-icon">🌐</div>
+                <h3>Frontend-разработка</h3>
+                <p>Создание адаптивных и интерактивных веб-приложений с использованием современных технологий.</p>
+            </div>
+            <div class="card reveal">
+                <div class="card-icon">⚙️</div>
+                <h3>Backend-разработка</h3>
+                <p>Проектирование и реализация серверной части приложений и API для распределенных систем.</p>
+            </div>
+            <div class="card reveal">
+                <div class="card-icon">📱</div>
+                <h3>Мобильная разработка</h3>
+                <p>Создание кроссплатформенных мобильных приложений с использованием React Native и Flutter.</p>
+            </div>
+            <div class="card reveal">
+                <div class="card-icon">🔒</div>
+                <h3>Кибербезопасность</h3>
+                <p>Проектирование защищенных приложений и проведение пентестов для выявления уязвимостей.</p>
+            </div>
+            <div class="card reveal">
+                <div class="card-icon">📊</div>
+                <h3>Анализ данных</h3>
+                <p>Обработка и анализ больших данных для извлечения ценной информации и поддержки принятия решений.</p>
+            </div>
+            <div class="card reveal">
+                <div class="card-icon">🤖</div>
+                <h3>Машинное обучение</h3>
+                <p>Разработка алгоритмов и моделей машинного обучения для решения практических задач.</p>
+            </div>
+            <div class="card reveal">
+                <div class="card-icon">☁️</div>
+                <h3>DevOps и CI/CD</h3>
+                <p>Автоматизация процессов сборки, тестирования и развертывания программного обеспечения.</p>
+            </div>
+        </div>
+        <div class="gallery section-reveal">
+            <div class="gallery-item reveal"><img src="2_it_1.jpg" alt="Фото ИТ компетенций 1" onerror="this.src='https://source.unsplash.com/400x300/?programming,code'"></div>
+            <div class="gallery-item reveal"><img src="2_it_2.jpg" alt="Фото ИТ компетенций 2" onerror="this.src='https://source.unsplash.com/400x300/?computer,software'"></div>
+            <div class="gallery-item reveal"><img src="2_it_3.jpg" alt="Фото ИТ компетенций 3" onerror="this.src='https://source.unsplash.com/400x300/?developer,workspace'"></div>
+            <div class="gallery-item reveal"><img src="2_it_4.jpg" alt="Фото ИТ компетенций 4" onerror="this.src='https://source.unsplash.com/400x300/?conference,tech'"></div>
+            <div class="gallery-item reveal"><img src="2_it_5.jpg" alt="Фото ИТ компетенций 5" onerror="this.src='https://source.unsplash.com/400x300/?coding,keyboard'"></div>
+            <div class="gallery-item reveal"><img src="2_it_6.jpg" alt="Фото ИТ компетенций 6" onerror="this.src='https://source.unsplash.com/400x300/?innovation,project'"></div>
+        </div>
+    </section>
+
+    <!-- Раздел Услуги -->
+    <section id="services" class="section section-reveal">
+        <div class="section-header">
+            <h2 class="section-title">Услуги</h2>
+            <p class="section-subtitle">Мои профессиональные услуги в области образования и IT-разработки</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <div class="service-icon">📖</div>
+                <h3>Разработка учебных курсов</h3>
+                <p>Создание структурированных онлайн и офлайн курсов по программированию, веб-разработке и другим техническим дисциплинам.</p>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">👨‍🏫</div>
+                <h3>Индивидуальное обучение</h3>
+                <p>Персональное менторство и обучение с индивидуальным подходом к каждому студенту, учитывая его цели и уровень подготовки.</p>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">🔧</div>
+                <h3>Техническая консультация</h3>
+                <p>Консультационные услуги по решению технических задач, оптимизации кода и улучшению архитектуры проектов.</p>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">📈</div>
+                <h3>Карьерный коучинг</h3>
+                <p>Помощь в составлении резюме, подготовке к собеседованиям и построении профессиональной карьеры в IT-сфере.</p>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">🎨</div>
+                <h3>Разработка прототипов</h3>
+                <p>Создание макетов и прототипов веб и мобильных приложений для демонстрации идей и привлечения клиентов.</p>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">📑</div>
+                <h3>Написание технической документации</h3>
+                <p>Подготовка и структурирование технической документации, API-документации и руководств пользователя.</p>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">🔍</div>
+                <h3>Аудит кода и проектов</h3>
+                <p>Проведение code-reviews, выявление проблем в архитектуре и предлагании оптимальных решений.</p>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">🎯</div>
+                <h3>Обучение под заказ</h3>
+                <p>Разработка и проведение корпоративных тренингов по востребованным технологиям и инструментам.</p>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">📦</div>
+                <h3>Разработка и внедрение решений</h3>
+                <p>Комплексные решения в области автоматизации бизнес-процессов и создания цифровых продуктов.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section id="contacts" class="contact-section section-reveal">
+        <div class="contact-container">
+            <h2 class="section-title">Связаться со мной</h2>
+            <p class="section-subtitle">Готов ответить на любые вопросы и обсудить ваши задачи</p>
+            <div class="contact-item">
+                <div class="contact-icon email-icon">
+                    <span>✉️</span>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-label">Email</div>
+                    <a href="mailto:example@yandex.ru" class="contact-link contact-value">alexey.ivanov@example.ru</a>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon vk-icon">
+                    <span>VK</span>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-label">ВКонтакте</div>
+                    <a href="https://vk.com/alexey.ivanov" target="_blank" rel="noopener noreferrer" class="contact-link contact-value">vk.com/alexey.ivanov</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-logo">PROFESSIONAL<span>.</span></div>
+        <p class="footer-text">
+            © 2024 Алексей Петрович Иванов. Все права защищены.
+            <br>Создано с любовью к образованию и технологиям.
+        </p>
+    </footer>
+
+    <!-- Скрипт для плавного появления контента -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Плавная прокрутка для ссылок с якорями
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        // Добавляем активный класс навигации
+                        document.querySelectorAll('.nav-link').forEach(link => {
+                            link.classList.remove('active');
+                        });
+                        const activeLink = document.querySelector('.nav-link[href^="#' + this.getAttribute('href').slice(1) + '"]');
+                        if (activeLink) {
+                            activeLink.classList.add('active');
+                        }
+                    }
+                });
+            });
+
+            // Появление элементов при прокрутке
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            const revealElements = document.querySelectorAll('.reveal');
+            revealElements.forEach(element => observer.observe(element));
+
+            // Плавное появление при загрузке страницы
+            setTimeout(() => {
+                const heroReveal = document.querySelector('.hero.section-reveal');
+                if (heroReveal) {
+                    heroReveal.classList.add('active');
+                }
+            }, 100);
+        });
+    </script>
+</body>
+</html>

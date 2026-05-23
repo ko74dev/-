@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Персональная страница — учитель и технический специалист</title>
+  <style>
+    /* ===== Сброс и базовые стили ===== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+      color: #2d3748;
+      line-height: 1.6;
+      background: #f7fafc;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* ===== Анимированный градиент на фоне ===== */
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ===== Шапка: фото + имя + навигация в одну линию ===== */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid #e2e8f0;
+      padding: 0.6rem 2rem;
+    }
+
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* Круглый фотопортрет */
+    .header-photo {
+      flex-shrink: 0;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid #667eea;
+      box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.15);
+    }
+
+    .header-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Имя и подзаголовок рядом с фото */
+    .header-title {
+      flex-shrink: 0;
+      min-width: 180px;
+    }
+
+    .header-title h1 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #1a202c;
+      line-height: 1.3;
+    }
+
+    .header-title p {
+      font-size: 0.8rem;
+      color: #718096;
+    }
+
+    /* Навигация */
+    .nav {
+      display: flex;
+      gap: 0.3rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav a {
+      padding: 0.45rem 1rem;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #4a5568;
+      transition: background 0.25s, color 0.25s;
+    }
+
+    .nav a:hover {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+    }
+
+    /* ===== Hero-секция с анимированным градиентом ===== */
+    .hero {
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+      background: linear-gradient(
+        -45deg,
+        #e0e7ff, #c7d2fe, #e9d5ff, #fbcfe8, #fef3c7, #dbeafe
+      );
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+    }
+
+    .hero h2 {
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
+      font-weight: 800;
+      margin-bottom: 1rem;
+      color: #1a202c;
+    }
+
+    .hero p {
+      max-width: 640px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+      color: #4a5568;
+    }
+
+    /* ===== Общие стили секций ===== */
+    .section {
+      padding: 4rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 0.5rem;
+      color: #1a202c;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: #718096;
+      margin-bottom: 2.5rem;
+      font-size: 0.95rem;
+    }
+
+    /* ===== Сетка карточек ===== */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 1.6rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06), 0 4px 12px rgba(0, 0, 0, 0.04);
+      border: 1px solid #edf2f7;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: fadeInUp 0.6s ease both;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(102, 126, 234, 0.12);
+    }
+
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+    }
+
+    .card h3 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: #2d3748;
+    }
+
+    .card p {
+      font-size: 0.9rem;
+      color: #718096;
+      line-height: 1.5;
+    }
+
+    /* Задержки анимации для карточек */
+    .card:nth-child(1)  { animation-delay: 0.05s; }
+    .card:nth-child(2)  { animation-delay: 0.1s; }
+    .card:nth-child(3)  { animation-delay: 0.15s; }
+    .card:nth-child(4)  { animation-delay: 0.2s; }
+    .card:nth-child(5)  { animation-delay: 0.25s; }
+    .card:nth-child(6)  { animation-delay: 0.3s; }
+    .card:nth-child(7)  { animation-delay: 0.35s; }
+    .card:nth-child(8)  { animation-delay: 0.4s; }
+    .card:nth-child(9)  { animation-delay: 0.45s; }
+
+    /* ===== Галерея ===== */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .gallery-item {
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      background: #e2e8f0;
+      border: 1px solid #edf2f7;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 16px rgba(102, 126, 234, 0.15);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Заглушка, если фото отсутствует */
+    .gallery-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #a0aec0;
+      font-size: 0.85rem;
+      background: linear-gradient(135deg, #f0f0ff, #fce4ec);
+    }
+
+    /* ===== Разделители секций ===== */
+    .section-divider {
+      max-width: 1200px;
+      margin: 0 auto;
+      border: none;
+      height: 1px;
+      background: linear-gradient(to right, transparent, #cbd5e0, transparent);
+    }
+
+    /* ===== Секция услуг (карточки с акцентом) ===== */
+    .services-section {
+      background: linear-gradient(
+        180deg,
+        #f7fafc 0%,
+        #edf2f7 100%
+      );
+    }
+
+    .services-section .card {
+      border-left: 4px solid transparent;
+      border-image: linear-gradient(135deg, #667eea, #764ba2) 1;
+      border-left-width: 4px;
+      border-top: none;
+      border-right: none;
+      border-bottom: none;
+    }
+
+    /* ===== Контакты ===== */
+    .contacts {
+      padding: 4rem 2rem;
+      text-align: center;
+      background: #fff;
+    }
+
+    .contacts-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: #1a202c;
+    }
+
+    .contacts-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.8rem 1.6rem;
+      border-radius: 12px;
+      background: #f7fafc;
+      border: 1px solid #e2e8f0;
+      font-size: 1rem;
+      color: #4a5568;
+      transition: all 0.3s ease;
+    }
+
+    .contact-link:hover {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      color: #fff;
+      border-color: transparent;
+      box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+    }
+
+    .contact-link svg {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+    }
+
+    /* ===== Подвал / копирайт ===== */
+    .footer {
+      padding: 1.5rem 2rem;
+      text-align: center;
+      background: linear-gradient(
+        -45deg,
+        #1a202c, #2d3748, #1a202c
+      );
+      background-size: 200% 200%;
+      animation: gradientShift 8s ease infinite;
+      color: #a0aec0;
+      font-size: 0.85rem;
+    }
+
+    /* ===== Адаптивность ===== */
+    @media (max-width: 768px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 0.6rem;
+      }
+
+      .header-title {
+        min-width: auto;
+      }
+
+      .nav {
+        justify-content: center;
+        width: 100%;
+      }
+
+      .nav a {
+        padding: 0.4rem 0.7rem;
+        font-size: 0.78rem;
+      }
+
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero {
+        padding: 3rem 1.5rem 2.5rem;
+      }
+
+      .section {
+        padding: 3rem 1.2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-photo {
+        width: 48px;
+        height: 48px;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .contacts-links {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== Шапка: фото, имя, навигация ===== -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-photo">
+        <img src="0_photo_portret.jpg" alt="Фото портрета">
+      </div>
+      <div class="header-title">
+        <h1>Иванов Иван Иванович</h1>
+        <p>Учитель · Технический специалист</p>
+      </div>
+      <nav class="nav">
+        <a href="#pedagogika">Педагогика</a>
+        <a href="#it">ИТ</a>
+        <a href="#services">Услуги</a>
+        <a href="#contacts">Контакты</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== Hero-секция ===== -->
+  <section class="hero">
+    <h2>Педагогика и технологии — в одном лице</h2>
+    <p>
+      Многолетний опыт в образовании и IT. Помогаю школам внедрять цифровые решения,
+      консультирую по образовательным платформам и создаю удобные инструменты для учителей и учеников.
+    </p>
+  </section>
+
+  <!-- ===== Секция 1: Педагогическая деятельность ===== -->
+  <section class="section" id="pedagogika">
+    <h2 class="section-title">Педагогическая деятельность</h2>
+    <p class="section-subtitle">Опыт, направления и достижения в области образования</p>
+
+    <div class="cards-grid">
+      <!-- Карточка 1 -->
+      <div class="card">
+        <div class="card-icon">📚</div>
+        <h3>Преподавание информатики</h3>
+        <p>Проведение уроков информатики и ИКТ для школьников 5–11 классов по ФГОС.</p>
+      </div>
+      <!-- Карточка 2 -->
+      <div class="card">
+        <div class="card-icon">🎓</div>
+        <h3>Подготовка к ОГЭ и ЕГЭ</h3>
+        <p>Системная подготовка учащихся к государственным экзаменам по информатике.</p>
+      </div>
+      <!-- Карточка 3 -->
+      <div class="card">
+        <div class="card-icon">🏆</div>
+        <h3>Олимпиадное движение</h3>
+        <p>Руководство кружком и подготовка призёров олимпиад регионального и всероссийского уровня.</p>
+      </div>
+      <!-- Карточка 4 -->
+      <div class="card">
+        <div class="card-icon">📋</div>
+        <h3>Методическая работа</h3>
+        <p>Разработка методических пособий, рабочих программ и электронных учебных материалов.</p>
+      </div>
+      <!-- Карточка 5 -->
+      <div class="card">
+        <div class="card-icon">👥</div>
+        <h3>Кураторство</h3>
+        <p>Классное руководство, организация воспитательной работы и внеклассных мероприятий.</p>
+      </div>
+      <!-- Карточка 6 -->
+      <div class="card">
+        <div class="card-icon">💡</div>
+        <h3>Педагогический проект</h3>
+        <p>Реализация проекта «Цифровая школа» — интеграция IT в образовательный процесс.</p>
+      </div>
+      <!-- Карточка 7 -->
+      <div class="card">
+        <div class="card-icon">🎤</div>
+        <h3>Мастер-классы</h3>
+        <p>Проведение мастер-классов для коллег по цифровым инструментам и интерактивным платформам.</p>
+      </div>
+      <!-- Карточка 8 -->
+      <div class="card">
+        <div class="card-icon">🌐</div>
+        <h3>Дистанционное обучение</h3>
+        <p>Организация и ведение онлайн-уроков, настройка дистанционных форматов обучения.</p>
+      </div>
+      <!-- Карточка 9 -->
+      <div class="card">
+        <div class="card-icon">📊</div>
+        <h3>Электронный журнал</h3>
+        <p>Ведение электронного журнала и дневника, работа в системах «МЭШ», «Дневник.ру».</p>
+      </div>
+    </div>
+
+    <!-- Галерея: 6 фото -->
+    <h3 class="section-title" style="font-size: 1.3rem; margin-bottom: 1rem;">Фотогалерея</h3>
+    <div class="gallery">
+      <div class="gallery-item">
+        <!-- Замените src на реальное фото -->
+        <img src="pedagogika_1.jpg" alt="Фото с урока" onerror="this.parentElement.innerHTML='<div class=gallery-placeholder>Фото 1</div>'">
+      </div>
+      <div class="gallery-item">
+        <img src="pedagogika_2.jpg" alt="Мастер-класс" onerror="this.parentElement.innerHTML='<div class=gallery-placeholder>Фото 2</div>'">
+      </div>
+      <div class="gallery-item">
+        <img src="pedagogika_3.jpg" alt="Олимпиада" onerror="this.parentElement.innerHTML='<div class=gallery-placeholder>Фото 3</div>'">
+      </div>
+      <div class="gallery-item">
+        <img src="pedagogika_4.jpg" alt="Внеклассное мероприятие" onerror="this.parentElement.innerHTML='<div class=gallery-placeholder>Фото 4</div>'">
+      </div>
+      <div class="gallery-item">
+        <img src="pedagogika_5.jpg" alt="Школьный проект" onerror="this.parentElement.innerHTML='<div class=gallery-placeholder>Фото 5</div>'">
+      </div>
+      <div class="gallery-item">
+        <img src="pedagogika_6.jpg" alt="Награждение" onerror="this.parentElement.innerHTML='<div class=gallery-placeholder>Фото 6</div>'">
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ===== Секция 2: ИТ компетенции ===== -->
+  <section class="section" id="it">
+    <h2 class="section-title">ИТ компетенции</h2>
+    <p class="section-subtitle">Технические навыки и опыт в цифровой сфере</p>
+
+    <div class="cards-grid">
+      <!-- Карточка 1 -->
+      <div class="card">
+        <div class="card-icon">💻</div>
+        <h3>Веб-разработка</h3>
+        <p>Создание сайтов и веб-приложений: HTML, CSS, JavaScript, адаптивная вёрстка.</p>
+      </div>
+      <!-- Карточка 2 -->
+      <div class="card">
+        <div class="card-icon">🐍</div>
+        <h3>Программирование</h3>
+        <p>Разработка скриптов и программ на Python и C++ для автоматизации задач.</p>
+      </div>
+      <!-- Карточка 3 -->
+      <div class="card">
+        <div class="card-icon">🗄️</div>
+        <h3>Базы данных</h3>
+        <p>Проектирование и администрирование БД: MySQL, PostgreSQL, SQLite.</p>
+      </div>
+      <!-- Карточка 4 -->
+      <div class="card">
+        <div class="card-icon">🖥️</div>
+        <h3>Системное администрирование</h3>
+        <p>Настройка и обслуживание компьютерных классов, серверов и локальных сетей.</p>
+      </div>
+      <!-- Карточка 5 -->
+      <div class="card">
+        <div class="card-icon">📱</div>
+        <h3>Мобильные платформы</h3>
+        <p>Работа с мобильными приложениями, настройка хромбуков и планшетов.</p>
+      </div>
+      <!-- Карточка 6 -->
+      <div class="card">
+        <div class="card-icon">🔒</div>
+        <h3>Информационная безопасность</h3>
+        <p>Настройка защиты персональных данных, обучение безопасному поведению в сети.</p>
+      </div>
+      <!-- Карточка 7 -->
+      <div class="card">
+        <div class="card-icon">🤖</div>
+        <h3>Робототехника</h3>
+        <p>Руководство кружком робототехники, работа с LEGO Mindstorms и Arduino.</p>
+      </div>
+      <!-- Карточка 8 -->
+      <div class="card">
+        <div class="card-icon">☁️</div>
+        <h3>Облачные сервисы</h3>
+        <p>Внедрение и настройка облачных решений: Google Workspace, Яндекс 360, МЭШ.</p>
+      </div>
+      <!-- Карточка 9 -->
+      <div class="card">
+        <div class="card-icon">📡</div>
+        <h3>Сетевые технологии</h3>
+        <p>Проектирование и обслуживание Wi-Fi сетей, настройка маршрутизаторов и коммутаторов.</p>
+      </div>
+    </div>
+
+    <!-- Галерея: 6 фото -->
+    <h3 class="section-title" style="font-size: 1.3rem; margin-bottom: 1rem;">Фотогалерея</h3>
+    <div class="gallery">
+      <div class="gallery-item">
+        <img src="it_1.jpg" alt="Компьютерный класс" onerror="this.parentElement.innerHTML='<div class=gallery-placeholder>Фото 1</div>'">
+      </div>
+      <div class="gallery-item">
+        <img src="it_2.jpg" alt="Робототехника" onerror="this.parentElement.innerHTML='<div class=gallery-placeholder>Фото 2</div>'">
+      </div>
+      <div class="gallery-item">
+        <img src="it_3.jpg" alt="Серверная" onerror="this.parentElement.innerHTML='<div class=gallery-placeholder>Фото 3</div>'">
+      </div>
+      <div class="gallery-item">
+        <img src="it_4.jpg" alt="Веб-проект" onerror="this.parentElement.innerHTML='<div class=gallery-placeholder>Фото 4</div>'">
+      </div>
+      <div class="gallery-item">
+        <img src="it_5.jpg" alt="Мастер-класс по IT" onerror="this.parentElement.innerHTML='<div class=gallery-placeholder>Фото 5</div>'">
+      </div>
+      <div class="gallery-item">
+        <img src="it_6.jpg" alt="Конференция" onerror="this.parentElement.innerHTML='<div class=gallery-placeholder>Фото 6</div>'">
+      </div>
+    </div>
+  </section>
+
+  <hr class="section-divider">
+
+  <!-- ===== Секция 3: Услуги ===== -->
+  <section class="services-section" id="services">
+    <div class="section" style="padding-top: 4rem; padding-bottom: 4rem;">
+      <h2 class="section-title">Услуги</h2>
+      <p class="section-subtitle">Педагогическое консультирование и ИТ-решения</p>
+
+      <div class="cards-grid">
+        <!-- Услуга 1 -->
+        <div class="card">
+          <div class="card-icon">🎯</div>
+          <h3>Репетиторство по информатике</h3>
+          <p>Индивидуальные и групповые занятия по школьной программе и подготовке к экзаменам.</p>
+        </div>
+        <!-- Услуга 2 -->
+        <div class="card">
+          <div class="card-icon">🌐</div>
+          <h3>Разработка школьных сайтов</h3>
+          <p>Создание и поддержка сайтов для школ, кружков и образовательных проектов.</p>
+        </div>
+        <!-- Услуга 3 -->
+        <div class="card">
+          <div class="card-icon">📱</div>
+          <h3>Настройка оборудования</h3>
+          <p>Установка и настройка компьютеров, принтеров, интерактивных панелей и проекторов.</p>
+        </div>
+        <!-- Услуга 4 -->
+        <div class="card">
+          <div class="card-icon">📖</div>
+          <h3>Педагогический консалтинг</h3>
+          <p>Консультации по внедрению цифровых инструментов в образовательный процесс.</p>
+        </div>
+        <!-- Услуга 5 -->
+        <div class="card">
+          <div class="card-icon">🎓</div>
+          <h3>Тренинги для учителей</h3>
+          <p>Проведение тренингов по работе с ИКТ, платформами и цифровым оборудованием.</p>
+        </div>
+        <!-- Услуга 6 -->
+        <div class="card">
+          <div class="card-icon">🔧</div>
+          <h3>Техподдержка</h3>
+          <p>Устранение неисправностей, ремонт компьютеров, восстановление данных.</p>
+        </div>
+        <!-- Услуга 7 -->
+        <div class="card">
+          <div class="card-icon">📝</div>
+          <h3>Разработка учебных материалов</h3>
+          <p>Создание интерактивных презентаций, тестов, тренажёров и электронных рабочих тетрадей.</p>
+        </div>
+        <!-- Услуга 8 -->
+        <div class="card">
+          <div class="card-icon">🔐</div>
+          <h3>Аудит информационной безопасности</h3>
+          <p>Проверка настроек безопасности школьной сети, рекомендации по защите данных.</p>
+        </div>
+        <!-- Услуга 9 -->
+        <div class="card">
+          <div class="card-icon">🤖</div>
+          <h3>Кружок робототехники</h3>
+          <p>Организация и ведение кружка робототехники для школьников на базе школы или онлайн.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Контакты ===== -->
+  <section class="contacts" id="contacts">
+    <h2 class="contacts-title">Контакты</h2>
+    <div class="contacts-links">
+      <!-- Email -->
+      <a href="mailto:ivanov@example.com" class="contact-link">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+        </svg>
+        ivanov@example.com
+      </a>
+      <!-- ВКонтакте -->
+      <a href="https://vk.com/ivanov_teacher" target="_blank" rel="noopener noreferrer" class="contact-link">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12.785 16.241s.288-.032.436-.194c.136-.148.132-.427.132-.427s-.02-1.304.587-1.496c.596-.19 1.362 1.26 2.174 1.817.613.42 1.08.328 1.08.328l2.172-.03s1.136-.07.598-.964c-.044-.073-.314-.661-1.618-1.869-1.365-1.265-1.183-1.06.462-3.246.999-1.33 1.398-2.142 1.273-2.491-.12-.333-.857-.244-.857-.244l-2.45.015s-.182-.025-.316.056c-.131.079-.216.263-.216.263s-.387 1.028-.903 1.903c-1.088 1.852-1.524 1.95-1.702 1.834-.414-.267-.31-1.075-.31-1.654 0-1.805.273-2.558-.533-2.751-.268-.064-.465-.106-1.15-.113-.878-.01-1.622.003-2.043.209-.28.137-.496.44-.364.457.163.022.53.1.725.365.252.343.243 1.114.243 1.114s.144 2.098-.337 2.36c-.329.18-.777-.187-1.736-1.866-.494-.851-.867-1.79-.867-1.79s-.072-.176-.2-.27c-.155-.114-.372-.15-.372-.15l-2.328.015s-.349.01-.477.161C3.25 7.046 3.4 7.337 3.4 7.337s1.815 4.232 3.873 6.373c1.887 1.963 4.034 1.832 4.034 1.832h.978z"/>
+        </svg>
+        ВКонтакте
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== Подвал / копирайт ===== -->
+  <footer class="footer">
+    © 2025 Иванов Иван Иванович. Все права защищены.
+  </footer>
+
+</body>
+</html>
