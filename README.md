@@ -25,15 +25,15 @@ python app.py
 для генерации шаблона конверсионного сайта-портфолио
 <table>
   <tr>
-    <td>Gemma-4-26B-A4B-it-UD-IQ4_XS \
+    <td>Gemma-4-26B-A4B-it-UD-IQ4_XS <hr>
       <img width=25% src="004/preview/Gemma-4-26B-A4B-it-UD-IQ4_XS.png"></td>
-    <td>Gemma-4-E4B-Agenti \
+    <td>Gemma-4-E4B-Agenti  <hr>
       <img width=25% src="004/preview/Gemma-4-E4B-Agenti.png"></td>
   </tr>
    <tr>
-    <td>Gemma-4-E4B-Uncensored \
+    <td>Gemma-4-E4B-Uncensored  <hr>
       <img width=25% src="004/preview/Gemma-4-E4B-Uncensored.png"></td>
-    <td>Jan-code-4b-Q8_0 \
+    <td>Jan-code-4b-Q8_0  <hr>
       <img width=25% src="004/preview/Jan-code-4b-Q8_0.png"></td>
   </tr>
 </table>
